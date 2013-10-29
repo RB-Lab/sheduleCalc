@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Calculate your shedule</title>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="jsviews/jsviews.min.js"></script>
+		<script src="js.js"></script>
+	</head>
+	<body>
+		<script id="lineTmpl" type="text/x-jsrender">
+			<li>{^{>name}}: {^{>(time * 1).toFixed(1)}} ± {^{> (uncertainty * 1).toFixed(1)}}% 
+				<button class="addForm">+</button>
+				{^{if issues.length tmpl="#listTmpl "}}
+				{{else}}
+					{^{if form tmpl="#lineFormTmpl "}}{{/if}}
+				{{/if}}
+			</li>
+		</script>
+		<script id="listTmpl" type="text/x-jsrender">
+			
+			<ol>{^{for issues tmpl="#lineTmpl" /}}</ol>
+				{^{if form tmpl="#lineFormTmpl "}}{{/if}}
+			
+		</script>
+		<script id="lineFormTmpl" type="text/x-jsrender">
+			<p>
+			<input type="text" data-link="form.name" placeholder="Issue" />
+			<input type="text" data-link="form.time" placeholder="Estimate time" />
+			<input type="text" data-link="form.uncertainty" placeholder="Uncertainty" />
+			<button class="addIssue">add</button>
+			</p>
+		</script>
+		<script id="totalTmpl" type="text/x-jsrender">
+			Total time: {^{>(time * 1).toFixed(1)}} ± {^{> (uncertainty * 1).toFixed(1)}}%
+		</script>
+		<div id="issues"></div>
+		<p id="total"></p>
+		<button id="addLine">+</button><br/>
+		<button id="save">save</button>
+	</body>
+</html>

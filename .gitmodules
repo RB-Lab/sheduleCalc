@@ -1,0 +1,3 @@
+[submodule "jsviews"]
+	path = jsviews
+	url = https://github.com/BorisMoore/jsviews.git
