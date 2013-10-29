@@ -3,14 +3,25 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Calculate your shedule</title>
+		<link rel="stylesheet" href="./style.css">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="jsviews/jsviews.min.js"></script>
 		<script src="js.js"></script>
 	</head>
+			<!--  ±×☑☐☒✓✕✖✘✔✍ -->
 	<body>
 		<script id="lineTmpl" type="text/x-jsrender">
-			<li>{^{>name}}: {^{>(time * 1).toFixed(1)}} ± {^{> (uncertainty * 1).toFixed(1)}}% 
-				<button class="addForm">+</button>
+			<li>
+				<div>
+					<span class="iss-name">{^{>name}}</span>
+					<span class="iss-buttons">
+						<a class="iss-add" title="add">+</a>
+						<a class="iss-edit" title="edit">✍</a>
+						<a class="iss-rm" title="delete">✘</a>
+					</span>
+					<span class="iss-unct">{^{> (uncertainty * 1).toFixed(1)}}% </span>
+					<span class="iss-time">{^{>(time * 1).toFixed(1)}}</span>
+				</div>
 				{^{if issues.length tmpl="#listTmpl "}}
 				{{else}}
 					{^{if form tmpl="#lineFormTmpl "}}{{/if}}
@@ -19,24 +30,38 @@
 		</script>
 		<script id="listTmpl" type="text/x-jsrender">
 			
-			<ol>{^{for issues tmpl="#lineTmpl" /}}</ol>
+			<ol class="iss-list">{^{for issues tmpl="#lineTmpl" /}}</ol>
 				{^{if form tmpl="#lineFormTmpl "}}{{/if}}
 			
 		</script>
 		<script id="lineFormTmpl" type="text/x-jsrender">
-			<p>
-			<input type="text" data-link="form.name" placeholder="Issue" />
-			<input type="text" data-link="form.time" placeholder="Estimate time" />
-			<input type="text" data-link="form.uncertainty" placeholder="Uncertainty" />
-			<button class="addIssue">add</button>
-			</p>
+			<div class="form">
+				<input class="input-name" type="text" data-link="form.name" placeholder="Issue" /><!--
+			 --><input class="input-oth" type="text" data-link="form.time" placeholder="Estimate time" /><!--
+			 --><input class="input-oth" type="text" data-link="form.uncertainty" placeholder="Uncertainty" /><!--
+			 --><div class="input-oth">
+					<button class="iss-add-new">add</button>
+					<button class="iss-esc">esc</button>
+				</div>
+			</div>
 		</script>
 		<script id="totalTmpl" type="text/x-jsrender">
 			Total time: {^{>(time * 1).toFixed(1)}} ± {^{> (uncertainty * 1).toFixed(1)}}%
 		</script>
-		<div id="issues"></div>
-		<p id="total"></p>
-		<button id="addLine">+</button><br/>
-		<button id="save">save</button>
+		<div id="frame">
+			<h1>Calculate your shedule</h1>
+			<p class="iss-list">
+			<span class="iss-name">Issue</span>
+				<span class="iss-buttons">&nbsp;</span>
+				<span class="iss-unct">Uncertainty, % </span>
+				<span class="iss-time">Time, h</span>
+			</p>
+			<div id="issues"></div>
+			<a id="iss-add-line" class="micro-button" title="add shedule">+</a>
+			<p id="total"></p>
+			<a id="save" class="middle-button" title="save session"></a>
+			<a id="truncate" class="middle-button" title="delete session">☠</a>
+		</div>
+		
 	</body>
 </html>

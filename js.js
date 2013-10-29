@@ -56,13 +56,13 @@ $(document).ready(function(){
 	listTmpl.link('#issues', project);
 	totalTmpl.link('#total', project);
 	
-	$('#addLine').on('click', function() {
+	$('#iss-add-line').on('click', function() {
 		project.showForm();
 	});
-	$(document).on('click', '.addForm', function () {
+	$(document).on('click', '.iss-add', function () {
 		$.view(this).data.showForm();
 	});
-	$(document).on('click', '.addIssue', function () {
+	$(document).on('click', '.iss-add-new', function () {
 		$.view(this).data.addIssue();
 		project.recalc();
 	});

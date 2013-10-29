@@ -1,0 +1,119 @@
+@import "settings";
+@import "mixins";
+
+body{
+	background: url(bcg.png) $body-bg;
+	color: $body-font-color;
+	font-family: $body-font-family;
+}
+a{
+	cursor: pointer;
+}
+
+h1{
+	font-weight: normal;
+}
+
+
+#frame{
+	max-width: 800px;
+	margin: auto;
+	overflow-x: hidden;
+}
+p.iss-list{
+	font-weight: bold;
+	.iss-name{
+		padding-left: 2em;
+	}
+	span{
+		text-align: center;
+	}
+}
+
+.iss-list{
+	div{
+		width: 100%;
+		margin-left: -200px;
+		padding: 0.5em 0 0 200px;
+		border-bottom: 1px solid #2E302D;
+		@include transition-simple(.5s);
+		&:hover{
+			background-color: rgba(139, 222, 255, 0.12);
+		}
+	}
+	.iss-buttons, .iss-unct, .iss-time{
+		float: right;
+		min-width: 5em;
+	}
+	>li>ol>li{
+		list-style: lower-alpha;
+		>ol>li{
+			list-style: lower-roman !important;
+		}
+	}
+}
+
+@mixin button{
+	border: 1px solid;
+	display: inline-block;
+	text-align: center;
+	@include transition-simple(.3s);
+	&:hover{
+		color: #5CFF00;
+		box-shadow: 0 0 2px #CDFD78;
+	}
+}
+
+@mixin input{
+	box-sizing:border-box;
+	background: none;
+	border: 1px solid $body-font-color;
+	color: $body-font-color;
+	padding: 0.2em 0.5em;
+}
+
+input[type="text"]{
+	@include input;
+}
+
+button{
+	@include button;
+	@include input;
+	cursor: pointer;
+}
+
+.iss-buttons a, .micro-button{
+	@include button;
+	width: 1.5em;
+	position: relative;
+	top: -0.2em;
+}
+
+.middle-button{
+	@include button;
+	font-size: 1.5em;
+	width: 2em;
+}
+
+.form{
+	margin: 0.4em 0;
+}
+
+.input-name{
+	width: 55%;
+	min-width: 5em;
+	margin-right: 0.5%
+}
+
+.input-oth{
+	width: 15%;
+	min-width: 5em;
+	margin-right: 0.5%
+}
+
+div.input-oth{
+	width: 12%;
+	min-width: 5.5em;
+	text-align: right;
+	display: inline-block;
+}

@@ -1,0 +1,114 @@
+body {
+  background: url(bcg.png) #3d3d3d;
+  color: #93aa81;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
+
+a {
+  cursor: pointer; }
+
+h1 {
+  font-weight: normal; }
+
+#frame {
+  max-width: 800px;
+  margin: auto;
+  overflow-x: hidden; }
+
+p.iss-list {
+  font-weight: bold; }
+  p.iss-list .iss-name {
+    padding-left: 2em; }
+  p.iss-list span {
+    text-align: center; }
+
+.iss-list div {
+  width: 100%;
+  margin-left: -200px;
+  padding: 0.5em 0 0 200px;
+  border-bottom: 1px solid #2e302d;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  -moz-transition: 0.5s;
+  transition: 0.5s; }
+  .iss-list div:hover {
+    background-color: rgba(139, 222, 255, 0.12); }
+.iss-list .iss-buttons, .iss-list .iss-unct, .iss-list .iss-time {
+  float: right;
+  min-width: 5em; }
+.iss-list > li > ol > li {
+  list-style: lower-alpha; }
+  .iss-list > li > ol > li > ol > li {
+    list-style: lower-roman !important; }
+
+input[type="text"] {
+  box-sizing: border-box;
+  background: none;
+  border: 1px solid #93aa81;
+  color: #93aa81;
+  padding: 0.2em 0.5em; }
+
+button {
+  border: 1px solid;
+  display: inline-block;
+  text-align: center;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  -moz-transition: 0.3s;
+  transition: 0.3s;
+  box-sizing: border-box;
+  background: none;
+  border: 1px solid #93aa81;
+  color: #93aa81;
+  padding: 0.2em 0.5em;
+  cursor: pointer; }
+  button:hover {
+    color: #5CFF00;
+    box-shadow: 0 0 2px #cdfd78; }
+
+.iss-buttons a, .micro-button {
+  border: 1px solid;
+  display: inline-block;
+  text-align: center;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  -moz-transition: 0.3s;
+  transition: 0.3s;
+  width: 1.5em;
+  position: relative;
+  top: -0.2em; }
+  .iss-buttons a:hover, .micro-button:hover {
+    color: #5CFF00;
+    box-shadow: 0 0 2px #cdfd78; }
+
+.middle-button {
+  border: 1px solid;
+  display: inline-block;
+  text-align: center;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  -moz-transition: 0.3s;
+  transition: 0.3s;
+  font-size: 1.5em;
+  width: 2em; }
+  .middle-button:hover {
+    color: #5CFF00;
+    box-shadow: 0 0 2px #cdfd78; }
+
+.form {
+  margin: 0.4em 0; }
+
+.input-name {
+  width: 55%;
+  min-width: 5em;
+  margin-right: 0.5%; }
+
+.input-oth {
+  width: 15%;
+  min-width: 5em;
+  margin-right: 0.5%; }
+
+div.input-oth {
+  width: 12%;
+  min-width: 5.5em;
+  text-align: right;
+  display: inline-block; }
