@@ -11,15 +11,26 @@ var Issue = (function () {
 		this.form = null;
 	}
 	
+	function addIssue (issue, hidden) {
+		issue.parent = this;
+		if(hidden){
+			this.issues.push(issue);
+		}else{
+			$.observable(this.issues).insert(issue);
+		}
+	}
+	
 	var editFlag = false;
 	
 	Issue.prototype.showForm = function () {
 		$.observable(this).setProperty('form', new Issue());
 	};
+	
 	Issue.prototype.hideForm = function () {
 		editFlag = false;
 		$.observable(this).setProperty('form', null);
 	};
+	
 	Issue.prototype.edit = function () {
 		editFlag = true;
 		var i = {
@@ -29,22 +40,24 @@ var Issue = (function () {
 		};
 		$.observable(this).setProperty('form', i);
 	};
+	
 	Issue.prototype.save = function () {
 		if(editFlag){
 			$.observable(this).setProperty('name',this.form.name);
 			$.observable(this).setProperty('time',this.form.time);
 			$.observable(this).setProperty('uncertainty',this.form.uncertainty);
 		}else{
-			$.observable(this.issues).insert(this.form);
+			addIssue.call(this, this.form);
 		}
 		this.hideForm();
 	};
+	
 	Issue.prototype.read = function (obj) {
 		init.call(this, obj.name, obj.time, obj.uncertainty);
 		for(var i = 0, l = obj.issues.length; i < l; i++){
 			var iss = new Issue();
 			iss.read(obj.issues[i]);
-			this.issues.push(iss);
+			addIssue.call(this, iss, true);
 		}
 	};
 	
@@ -66,6 +79,15 @@ var Issue = (function () {
 		$.observable(this).setProperty('time', 0);
 		$.observable(this).setProperty('uncertainty', 0);
 	};
+	
+	Issue.prototype.remove = function () {
+		for(var i = 0, l = this.parent.issues.length; i < l; i++){
+			if (this.parent.issues[i] == this) {
+				$.observable(this.parent.issues).remove(i);
+			};
+		}
+	};
+	
 	return Issue;
 })();
 
@@ -105,6 +127,10 @@ $(document).ready(function(){
 	});
 	$(document).on('click', '.iss-edit', function () {
 		$.view(this).data.edit();
+	});
+	$(document).on('click', '.iss-rm', function () {
+		$.view(this).data.remove();
+		project.recalc();
 	});
 	$(document).on('click', '.iss-esc', function () {
 		$.view(this).data.hideForm();
