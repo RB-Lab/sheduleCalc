@@ -11,12 +11,33 @@ var Issue = (function () {
 		this.form = null;
 	}
 	
+	var editFlag = false;
+	
 	Issue.prototype.showForm = function () {
 		$.observable(this).setProperty('form', new Issue());
 	};
-	Issue.prototype.addIssue = function () {
-		$.observable(this.issues).insert(this.form);
+	Issue.prototype.hideForm = function () {
+		editFlag = false;
 		$.observable(this).setProperty('form', null);
+	};
+	Issue.prototype.edit = function () {
+		editFlag = true;
+		var i = {
+			name: this.name,
+			time: this.time,
+			uncertainty: this.uncertainty
+		};
+		$.observable(this).setProperty('form', i);
+	};
+	Issue.prototype.save = function () {
+		if(editFlag){
+			$.observable(this).setProperty('name',this.form.name);
+			$.observable(this).setProperty('time',this.form.time);
+			$.observable(this).setProperty('uncertainty',this.form.uncertainty);
+		}else{
+			$.observable(this.issues).insert(this.form);
+		}
+		this.hideForm();
 	};
 	Issue.prototype.read = function (obj) {
 		init.call(this, obj.name, obj.time, obj.uncertainty);
@@ -81,5 +102,11 @@ $(document).ready(function(){
 	$(document).on('click', '.iss-add-new', function () {
 		$.view(this).data.save();
 		project.recalc();
+	});
+	$(document).on('click', '.iss-edit', function () {
+		$.view(this).data.edit();
+	});
+	$(document).on('click', '.iss-esc', function () {
+		$.view(this).data.hideForm();
 	});
 });
