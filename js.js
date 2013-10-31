@@ -39,6 +39,12 @@ var Issue = (function () {
 		$.observable(this).setProperty('time', totalTime);
 		$.observable(this).setProperty('uncertainty', totalUncert/totalTime);
 	};
+	
+	Issue.prototype.truncate = function () {
+		$.observable(this).setProperty('issues', []);
+		$.observable(this).setProperty('time', 0);
+		$.observable(this).setProperty('uncertainty', 0);
+	};
 	return Issue;
 })();
 
@@ -56,17 +62,24 @@ $(document).ready(function(){
 	listTmpl.link('#issues', project);
 	totalTmpl.link('#total', project);
 	
-	$('#iss-add-line').on('click', function() {
+	$('#iss-add-line').click(function() {
 		project.showForm();
 	});
+	$('#save').click(function () {
+		localStorage.setItem('project', JSON.stringify(project));
+	});
+	$('#truncate').click(function () {
+		if(confirm('Do you really want to truncate all saved data?')){
+			localStorage.removeItem('project');
+			project.truncate();
+		}
+	});
+	
 	$(document).on('click', '.iss-add', function () {
 		$.view(this).data.showForm();
 	});
 	$(document).on('click', '.iss-add-new', function () {
-		$.view(this).data.addIssue();
+		$.view(this).data.save();
 		project.recalc();
-	});
-	$('#save').click(function () {
-		localStorage.setItem('project', JSON.stringify(project));
 	});
 });
