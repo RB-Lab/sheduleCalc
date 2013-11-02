@@ -61,6 +61,20 @@ var Issue = (function () {
 		}
 	};
 	
+	// we need this method to remove circular links (this.parent) from data structure to encode it int JSON
+	Issue.prototype.serialize = function () {
+		var me = {
+			name: this.name,
+			time: this.time,
+			uncertainty: this.uncertainty,
+			issues: []
+		};
+		for(var i = 0, l = this.issues.length; i < l; i++){
+			me.issues.push(this.issues[i].serialize());
+		}
+		return me;
+	};
+	
 	Issue.prototype.recalc = function () {
 		if(this.issues.length == 0) return;
 		var totalTime = 0;
@@ -109,7 +123,7 @@ $(document).ready(function(){
 		project.showForm();
 	});
 	$('#save').click(function () {
-		localStorage.setItem('project', JSON.stringify(project));
+		localStorage.setItem('project', JSON.stringify(project.serialize()));
 	});
 	$('#truncate').click(function () {
 		if(confirm('Do you really want to truncate all saved data?')){
