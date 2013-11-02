@@ -48,6 +48,30 @@
 		</script>
 		<script id="totalTmpl" type="text/x-jsrender">
 			Total time: {^{>(time * 1).toFixed(1)}} ± {^{> (uncertainty * 1).toFixed(1)}}%
+			<table>
+				<thead>
+					<tr>
+						<td></td>
+						<td>(^_^)</td>
+						<td>(o_o)</td>
+						<td>(&gt;_&lt;)</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>hours</th>
+						<td>{^{>(time - (time * uncertainty/100)).toFixed(1)}}</td>
+						<td>{^{>(time * 1).toFixed(1)}}</td>
+						<td>{^{>(time + (time * uncertainty/100)).toFixed(1)}}</td>
+					</tr>
+					<tr>
+						<th>days</th>
+						<td>{^{>((time - (time * uncertainty/100))/8).toFixed(1)}}</td>
+						<td>{^{>(time/8).toFixed(1)}}</td>
+						<td>{^{>((time + (time * uncertainty/100))/8).toFixed(1)}}</td>
+					</tr>
+				</tbody>
+			</table>
 		</script>
 		<div id="frame">
 			<h1>Calculate your shedule</h1>

@@ -117,3 +117,14 @@ div.input-oth{
 	text-align: right;
 	display: inline-block;
 }
+
+table{
+	border-collapse: collapse;
+	td, th{
+		border: 1px solid #303133;
+		padding: 0.2em 1em;
+	}
+	thead{
+		font-weight: bold
+	}
+}

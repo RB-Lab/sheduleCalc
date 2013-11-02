@@ -112,3 +112,11 @@ div.input-oth {
   min-width: 5.5em;
   text-align: right;
   display: inline-block; }
+
+table {
+  border-collapse: collapse; }
+  table td, table th {
+    border: 1px solid #303133;
+    padding: 0.2em 1em; }
+  table thead {
+    font-weight: bold; }
