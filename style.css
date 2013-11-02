@@ -21,7 +21,7 @@ p.iss-list {
   p.iss-list span {
     text-align: center; }
 
-.iss-list div {
+.iss-list .table-row {
   width: 100%;
   margin-left: -200px;
   padding: 0.5em 0 0 200px;
@@ -30,7 +30,7 @@ p.iss-list {
   -o-transition: 0.5s;
   -moz-transition: 0.5s;
   transition: 0.5s; }
-  .iss-list div:hover {
+  .iss-list .table-row:hover {
     background-color: rgba(139, 222, 255, 0.12); }
 .iss-list .iss-buttons, .iss-list .iss-unct, .iss-list .iss-time {
   float: right;
